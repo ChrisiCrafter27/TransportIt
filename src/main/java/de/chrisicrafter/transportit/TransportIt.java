@@ -2,6 +2,7 @@ package de.chrisicrafter.transportit;
 
 import com.mojang.logging.LogUtils;
 import de.chrisicrafter.transportit.entity.ModEntities;
+import de.chrisicrafter.transportit.item.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -37,12 +38,13 @@ import org.slf4j.Logger;
 public class TransportIt {
 
     public static final String MOD_ID = "transportit";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public TransportIt() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        //Registering the entity(type)
+        ModItems.register(modEventBus);
+
         ModEntities.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);

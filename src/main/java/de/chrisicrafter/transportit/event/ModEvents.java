@@ -14,10 +14,9 @@ public class ModEvents {
     @SubscribeEvent
     public static void onBlockMine(BlockEvent.BreakEvent event) {
         if(event.getLevel() instanceof ServerLevel level) {
-            //To test if the entity can be spawned. The error occurs here.
             CustomMinecartFurnace entity = new CustomMinecartFurnace(ModEntities.CUSTOM_MINECART_FURNACE.get(), level);
             entity.setPos(event.getPos().getCenter());
-            level.addFreshEntity(entity);
+            //level.addFreshEntity(entity);
         }
     }
 
