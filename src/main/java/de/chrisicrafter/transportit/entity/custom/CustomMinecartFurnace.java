@@ -1,4 +1,4 @@
-package de.chrisicrafter.transportit.entity;
+package de.chrisicrafter.transportit.entity.custom;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -47,11 +47,6 @@ public class CustomMinecartFurnace extends MinecartFurnace {
     @Override
     public float getMaxCartSpeedOnRail() {
         return 4.0f;
-    }
-
-    @Override
-    protected void moveAlongTrack(BlockPos p_38569_, BlockState p_38570_) {
-
     }
 
     @Override
