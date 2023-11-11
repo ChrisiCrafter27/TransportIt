@@ -1,23 +1,18 @@
 package de.chrisicrafter.transportit;
 
 import com.mojang.logging.LogUtils;
+import de.chrisicrafter.transportit.block.ModBlocks;
 import de.chrisicrafter.transportit.entity.ModEntities;
 import de.chrisicrafter.transportit.item.ModItems;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.MinecartRenderer;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.RenderTypeHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -29,9 +24,6 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
 @Mod(TransportIt.MOD_ID)
@@ -44,6 +36,7 @@ public class TransportIt {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
         ModEntities.register(modEventBus);
 
@@ -58,8 +51,10 @@ public class TransportIt {
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        //if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS)
-            //event.accept(EXAMPLE_BLOCK_ITEM);
+        if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS)
+            event.accept(ModBlocks.POWERED_POWERED_RAIL.get());
+        else if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES)
+            event.accept(ModBlocks.POWERED_POWERED_RAIL.get());
     }
 
     @SubscribeEvent
@@ -74,6 +69,8 @@ public class TransportIt {
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             LOGGER.info("HELLO FROM CLIENT SETUP");
+            EntityRenderers.register(ModEntities.CUSTOM_MINECART_FURNACE.get(), context -> new MinecartRenderer<>(context, ModelLayers.FURNACE_MINECART));
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.POWERED_POWERED_RAIL.get(), RenderType.cutout());
         }
     }
 }

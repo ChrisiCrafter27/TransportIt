@@ -1,6 +1,5 @@
 package de.chrisicrafter.transportit.entity.custom;
 
-import de.chrisicrafter.transportit.TransportIt;
 import de.chrisicrafter.transportit.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -14,7 +13,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
-import net.minecraft.world.entity.vehicle.MinecartFurnace;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -37,8 +35,8 @@ public class CustomMinecartFurnace extends AbstractMinecart {
         super(type, level);
     }
 
-    public CustomMinecartFurnace(Level level, double d0, double d1, double d2) {
-        super(ModEntities.CUSTOM_MINECART_FURNACE.get(), level, d0, d1, d2);
+    public CustomMinecartFurnace(Level level, double x, double y, double z) {
+        super(ModEntities.CUSTOM_MINECART_FURNACE.get(), level, x, y, z);
     }
 
     public void tick() {
@@ -91,7 +89,6 @@ public class CustomMinecartFurnace extends AbstractMinecart {
             this.xPush = vec3.x / d4 * d5;
             this.zPush = vec3.z / d4 * d5;
         }
-
     }
 
     @Override
@@ -116,9 +113,6 @@ public class CustomMinecartFurnace extends AbstractMinecart {
 
     @Override
     public InteractionResult interact(Player player, InteractionHand hand) {
-
-        TransportIt.LOGGER.info("Use on custom entity");
-
         ItemStack itemstack = player.getItemInHand(hand);
         if (INGREDIENT.test(itemstack) && this.fuel + 3600 <= 32000) {
             if (!player.getAbilities().instabuild) {
@@ -164,5 +158,10 @@ public class CustomMinecartFurnace extends AbstractMinecart {
 
     public BlockState getDefaultDisplayBlockState() {
         return Blocks.FURNACE.defaultBlockState().setValue(FurnaceBlock.FACING, Direction.NORTH).setValue(FurnaceBlock.LIT, Boolean.valueOf(this.hasFuel()));
+    }
+
+    @Override
+    public EntityType<?> getType() {
+        return ModEntities.CUSTOM_MINECART_FURNACE.get();
     }
 }
