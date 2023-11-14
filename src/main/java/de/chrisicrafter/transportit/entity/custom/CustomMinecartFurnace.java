@@ -8,6 +8,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
@@ -24,7 +25,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
-public class CustomMinecartFurnace extends AbstractMinecart {
+public class CustomMinecartFurnace extends CustomAbstractMinecart implements Container {
     private static final EntityDataAccessor<Boolean> DATA_ID_FUEL = SynchedEntityData.defineId(CustomMinecartFurnace.class, EntityDataSerializers.BOOLEAN);
     private int fuel;
     public double xPush;
@@ -56,18 +57,13 @@ public class CustomMinecartFurnace extends AbstractMinecart {
         }
     }
 
-    public AbstractMinecart.Type getMinecartType() {
-        return AbstractMinecart.Type.FURNACE;
+    public CustomAbstractMinecart.Type getMinecartType() {
+        return CustomAbstractMinecart.Type.FURNACE;
     }
 
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(DATA_ID_FUEL, false);
-    }
-
-    @Override
-    protected double getMaxSpeed() {
-        return (this.isInWater() ? 3.0D / 20.0D : 4.0D);
     }
 
     @Override
@@ -128,11 +124,6 @@ public class CustomMinecartFurnace extends AbstractMinecart {
     }
 
     @Override
-    public float getMaxCartSpeedOnRail() {
-        return 4.0f;
-    }
-
-    @Override
     protected void addAdditionalSaveData(@NotNull CompoundTag tag) {
         super.addAdditionalSaveData(tag);
         tag.putDouble("PushX", this.xPush);
@@ -164,4 +155,60 @@ public class CustomMinecartFurnace extends AbstractMinecart {
     public EntityType<?> getType() {
         return ModEntities.CUSTOM_MINECART_FURNACE.get();
     }
+
+    @Override
+    public int getContainerSize() {
+        return 1;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return true;
+    }
+
+    @Override
+    public ItemStack getItem(int p_18941_) {
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    public ItemStack removeItem(int p_18942_, int p_18943_) {
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int p_18951_) {
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    public void setItem(int p_18944_, ItemStack p_18945_) {
+        if(INGREDIENT.test(p_18945_)) this.fuel += 3600;
+    }
+
+    @Override
+    public int getMaxStackSize() {
+        return 1;
+    }
+
+    @Override
+    public void setChanged() {}
+
+    @Override
+    public boolean stillValid(Player p_18946_) {
+        return true;
+    }
+
+    @Override
+    public boolean canPlaceItem(int p_18952_, ItemStack p_18953_) {
+        return INGREDIENT.test(p_18953_) && this.fuel + 3600 <= 32000;
+    }
+
+    @Override
+    public boolean canTakeItem(Container p_273520_, int p_272681_, ItemStack p_273702_) {
+        return false;
+    }
+
+    @Override
+    public void clearContent() {}
 }

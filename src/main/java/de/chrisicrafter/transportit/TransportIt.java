@@ -3,6 +3,7 @@ package de.chrisicrafter.transportit;
 import com.mojang.logging.LogUtils;
 import de.chrisicrafter.transportit.block.ModBlocks;
 import de.chrisicrafter.transportit.entity.ModEntities;
+import de.chrisicrafter.transportit.entity.renderer.CustomMinecartRenderer;
 import de.chrisicrafter.transportit.item.ModItems;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -47,14 +48,20 @@ public class TransportIt {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        LOGGER.info("HELLO FROM COMMON SETUP");
+        LOGGER.info("COMMON SETUP");
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS)
+        if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
             event.accept(ModBlocks.POWERED_POWERED_RAIL.get());
-        else if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES)
+            event.accept(ModBlocks.BRAKE_RAIL.get());
+            event.accept(ModBlocks.STATION_RAIL.get());
+        }
+        else if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.accept(ModBlocks.POWERED_POWERED_RAIL.get());
+            event.accept(ModBlocks.BRAKE_RAIL.get());
+            event.accept(ModBlocks.STATION_RAIL.get());
+        }
     }
 
     @SubscribeEvent
@@ -66,11 +73,14 @@ public class TransportIt {
     public static class ClientModEvents {
 
         @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            EntityRenderers.register(ModEntities.CUSTOM_MINECART_FURNACE.get(), context -> new MinecartRenderer<>(context, ModelLayers.FURNACE_MINECART));
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            LOGGER.info("CLIENT SETUP");
+            EntityRenderers.register(ModEntities.CUSTOM_MINECART_FURNACE.get(), context -> new CustomMinecartRenderer<>(context, ModelLayers.FURNACE_MINECART));
+            EntityRenderers.register(ModEntities.CUSTOM_MINECART_COMMAND_BLOCK.get(), context -> new CustomMinecartRenderer<>(context, ModelLayers.COMMAND_BLOCK_MINECART));
+            EntityRenderers.register(ModEntities.CUSTOM_MINECART.get(), context -> new CustomMinecartRenderer<>(context, ModelLayers.MINECART));
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.POWERED_POWERED_RAIL.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.STATION_RAIL.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.BRAKE_RAIL.get(), RenderType.cutout());
         }
     }
 }

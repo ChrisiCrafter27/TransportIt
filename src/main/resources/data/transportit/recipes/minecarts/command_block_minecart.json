@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "M"
+  ],
+  "key": {
+    "M": {
+      "item": "minecraft:minecart"
+    },
+    "X": {
+      "item": "minecraft:command_block"
+    }
+  },
+  "result": {
+    "item": "minecraft:command_block_minecart"
+  }
+}

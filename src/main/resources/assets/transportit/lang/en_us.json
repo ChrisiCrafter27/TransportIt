@@ -1,3 +1,5 @@
 {
-  "block.transportit.powered_powered_rail": "Powered Powered Rail"
+  "block.transportit.powered_powered_rail": "Powered Powered Rail",
+  "block.transportit.station_rail": "Station Rail",
+  "block.transportit.brake_rail": "Brake Rail"
 }

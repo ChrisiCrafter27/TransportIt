@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    "RXR",
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:powered_rail"
+    },
+    "X": {
+      "item": "minecraft:redstone_torch"
+    }
+  },
+  "result": {
+    "item": "transportit:powered_powered_rail",
+    "count": 8
+  }
+}

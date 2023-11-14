@@ -1,5 +1,9 @@
 package de.chrisicrafter.transportit.item.custom;
 
+import de.chrisicrafter.transportit.block.custom.CustomBaseRailBlock;
+import de.chrisicrafter.transportit.entity.custom.CustomMinecart;
+import de.chrisicrafter.transportit.entity.custom.CustomAbstractMinecart;
+import de.chrisicrafter.transportit.entity.custom.CustomMinecartCommandBlock;
 import de.chrisicrafter.transportit.entity.custom.CustomMinecartFurnace;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -8,12 +12,10 @@ import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.vehicle.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.RailShape;
@@ -33,7 +35,7 @@ public class CustomMinecartItem extends Item {
             double d2 = vec3.z() + (double)direction.getStepZ() * 1.125D;
             BlockPos blockpos = p_42949_.pos().relative(direction);
             BlockState blockstate = level.getBlockState(blockpos);
-            RailShape railshape = blockstate.getBlock() instanceof BaseRailBlock ? ((BaseRailBlock)blockstate.getBlock()).getRailDirection(blockstate, level, blockpos, null) : RailShape.NORTH_SOUTH;
+            RailShape railshape = blockstate.getBlock() instanceof CustomBaseRailBlock ? ((CustomBaseRailBlock)blockstate.getBlock()).getRailDirection(blockstate, level, blockpos, null) : RailShape.NORTH_SOUTH;
             double d3;
             if (blockstate.is(BlockTags.RAILS)) {
                 if (railshape.isAscending()) {
@@ -47,7 +49,7 @@ public class CustomMinecartItem extends Item {
                 }
 
                 BlockState blockstate1 = level.getBlockState(blockpos.below());
-                RailShape railshape1 = blockstate1.getBlock() instanceof BaseRailBlock ? blockstate1.getValue(((BaseRailBlock)blockstate1.getBlock()).getShapeProperty()) : RailShape.NORTH_SOUTH;
+                RailShape railshape1 = blockstate1.getBlock() instanceof CustomBaseRailBlock ? blockstate1.getValue(((CustomBaseRailBlock)blockstate1.getBlock()).getShapeProperty()) : RailShape.NORTH_SOUTH;
                 if (direction != Direction.DOWN && railshape1.isAscending()) {
                     d3 = -0.4D;
                 } else {
@@ -55,7 +57,7 @@ public class CustomMinecartItem extends Item {
                 }
             }
 
-            AbstractMinecart abstractminecart = createMinecart(level, d0, d1 + d3, d2, ((CustomMinecartItem)p_42950_.getItem()).type);
+            CustomAbstractMinecart abstractminecart = createMinecart(level, d0, d1 + d3, d2, ((CustomMinecartItem)p_42950_.getItem()).type);
             if (p_42950_.hasCustomHoverName()) {
                 abstractminecart.setCustomName(p_42950_.getHoverName());
             }
@@ -69,9 +71,9 @@ public class CustomMinecartItem extends Item {
             p_42947_.level().levelEvent(1000, p_42947_.pos(), 0);
         }
     };
-    final AbstractMinecart.Type type;
+    final CustomAbstractMinecart.Type type;
 
-    public CustomMinecartItem(AbstractMinecart.Type p_42938_, Item.Properties p_42939_) {
+    public CustomMinecartItem(CustomAbstractMinecart.Type p_42938_, Item.Properties p_42939_) {
         super(p_42939_);
         this.type = p_42938_;
         DispenserBlock.registerBehavior(this, DISPENSE_ITEM_BEHAVIOR);
@@ -86,13 +88,13 @@ public class CustomMinecartItem extends Item {
         } else {
             ItemStack itemstack = p_42943_.getItemInHand();
             if (!level.isClientSide) {
-                RailShape railshape = blockstate.getBlock() instanceof BaseRailBlock ? ((BaseRailBlock)blockstate.getBlock()).getRailDirection(blockstate, level, blockpos, null) : RailShape.NORTH_SOUTH;
+                RailShape railshape = blockstate.getBlock() instanceof CustomBaseRailBlock ? ((CustomBaseRailBlock)blockstate.getBlock()).getRailDirection(blockstate, level, blockpos, null) : RailShape.NORTH_SOUTH;
                 double d0 = 0.0D;
                 if (railshape.isAscending()) {
                     d0 = 0.5D;
                 }
 
-                AbstractMinecart abstractminecart = createMinecart(level, (double)blockpos.getX() + 0.5D, (double)blockpos.getY() + 0.0625D + d0, (double)blockpos.getZ() + 0.5D, this.type);
+                CustomAbstractMinecart abstractminecart = createMinecart(level, (double)blockpos.getX() + 0.5D, (double)blockpos.getY() + 0.0625D + d0, (double)blockpos.getZ() + 0.5D, this.type);
                 if (itemstack.hasCustomHoverName()) {
                     abstractminecart.setCustomName(itemstack.getHoverName());
                 }
@@ -106,19 +108,19 @@ public class CustomMinecartItem extends Item {
         }
     }
 
-    public static AbstractMinecart createMinecart(Level p_38120_, double p_38121_, double p_38122_, double p_38123_, AbstractMinecart.Type p_38124_) {
-        if (p_38124_ == AbstractMinecart.Type.CHEST) {
-            return new MinecartChest(p_38120_, p_38121_, p_38122_, p_38123_);
-        } else if (p_38124_ == AbstractMinecart.Type.FURNACE) {
+    public static CustomAbstractMinecart createMinecart(Level p_38120_, double p_38121_, double p_38122_, double p_38123_, CustomAbstractMinecart.Type p_38124_) {
+        if (p_38124_ == CustomAbstractMinecart.Type.CHEST) {
+            return null;
+        } else if (p_38124_ == CustomAbstractMinecart.Type.FURNACE) {
             return new CustomMinecartFurnace(p_38120_, p_38121_, p_38122_, p_38123_);
-        } else if (p_38124_ == AbstractMinecart.Type.TNT) {
-            return new MinecartTNT(p_38120_, p_38121_, p_38122_, p_38123_);
-        } else if (p_38124_ == AbstractMinecart.Type.SPAWNER) {
-            return new MinecartSpawner(p_38120_, p_38121_, p_38122_, p_38123_);
-        } else if (p_38124_ == AbstractMinecart.Type.HOPPER) {
-            return new MinecartHopper(p_38120_, p_38121_, p_38122_, p_38123_);
+        } else if (p_38124_ == CustomAbstractMinecart.Type.TNT) {
+            return null;
+        } else if (p_38124_ == CustomAbstractMinecart.Type.SPAWNER) {
+            return null;
+        } else if (p_38124_ == CustomAbstractMinecart.Type.HOPPER) {
+            return null;
         } else {
-            return (p_38124_ == AbstractMinecart.Type.COMMAND_BLOCK ? new MinecartCommandBlock(p_38120_, p_38121_, p_38122_, p_38123_) : new Minecart(p_38120_, p_38121_, p_38122_, p_38123_));
+            return (p_38124_ == CustomAbstractMinecart.Type.COMMAND_BLOCK ? new CustomMinecartCommandBlock(p_38120_, p_38121_, p_38122_, p_38123_) : new CustomMinecart(p_38120_, p_38121_, p_38122_, p_38123_));
         }
     }
 }

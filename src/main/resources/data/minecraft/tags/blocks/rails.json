@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "transportit:powered_powered_rail"
+    "transportit:powered_powered_rail",
+    "transportit:station_rail",
+    "transportit:brake_rail"
   ]
 }

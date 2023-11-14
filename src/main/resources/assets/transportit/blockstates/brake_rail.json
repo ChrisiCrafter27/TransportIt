@@ -1,0 +1,152 @@
+{
+  "variants": {
+    "powered=false,shape=ascending_east": {
+      "model": "transportit:block/brake_rail_raised_ne",
+      "y": 90
+    },
+    "powered=false,shape=ascending_north": {
+      "model": "transportit:block/brake_rail_raised_ne"
+    },
+    "powered=false,shape=ascending_south": {
+      "model": "transportit:block/brake_rail_raised_sw"
+    },
+    "powered=false,shape=ascending_west": {
+      "model": "transportit:block/brake_rail_raised_sw",
+      "y": 90
+    },
+    "powered=true,shape=ascending_east": {
+      "model": "transportit:block/brake_rail_raised_ne_on",
+      "y": 90
+    },
+    "powered=true,shape=ascending_north": {
+      "model": "transportit:block/brake_rail_raised_ne_on"
+    },
+    "powered=true,shape=ascending_south": {
+      "model": "transportit:block/brake_rail_raised_sw_on"
+    },
+    "powered=true,shape=ascending_west": {
+      "model": "transportit:block/brake_rail_raised_sw_on",
+      "y": 90
+    },
+    "powered=false,shape=east_west,connection=none,direction=positive": {
+      "model": "transportit:block/brake_rail_none",
+      "y": 90
+    },
+    "powered=false,shape=north_south,connection=none,direction=positive": {
+      "model": "transportit:block/brake_rail_none",
+      "y": 180
+    },
+    "powered=false,shape=east_west,connection=up,direction=positive": {
+      "model": "transportit:block/brake_rail_up",
+      "y": 90
+    },
+    "powered=false,shape=north_south,connection=up,direction=positive": {
+      "model": "transportit:block/brake_rail_up",
+      "y": 180
+    },
+    "powered=false,shape=east_west,connection=down,direction=positive": {
+      "model": "transportit:block/brake_rail_down",
+      "y": 90
+    },
+    "powered=false,shape=north_south,connection=down,direction=positive": {
+      "model": "transportit:block/brake_rail_down",
+      "y": 180
+    },
+    "powered=false,shape=east_west,connection=both,direction=positive": {
+      "model": "transportit:block/brake_rail_both",
+      "y": 90
+    },
+    "powered=false,shape=north_south,connection=both,direction=positive": {
+      "model": "transportit:block/brake_rail_both",
+      "y": 180
+    },
+    "powered=true,shape=east_west,connection=none,direction=positive": {
+      "model": "transportit:block/brake_rail_none_on",
+      "y": 90
+    },
+    "powered=true,shape=north_south,connection=none,direction=positive": {
+      "model": "transportit:block/brake_rail_none_on",
+      "y": 180
+    },
+    "powered=true,shape=east_west,connection=up,direction=positive": {
+      "model": "transportit:block/brake_rail_up_on",
+      "y": 90
+    },
+    "powered=true,shape=north_south,connection=up,direction=positive": {
+      "model": "transportit:block/brake_rail_up_on",
+      "y": 180
+    },
+    "powered=true,shape=east_west,connection=down,direction=positive": {
+      "model": "transportit:block/brake_rail_down_on",
+      "y": 90
+    },
+    "powered=true,shape=north_south,connection=down,direction=positive": {
+      "model": "transportit:block/brake_rail_down_on",
+      "y": 180
+    },
+    "powered=true,shape=east_west,connection=both,direction=positive": {
+      "model": "transportit:block/brake_rail_both_on",
+      "y": 90
+    },
+    "powered=true,shape=north_south,connection=both,direction=positive": {
+      "model": "transportit:block/brake_rail_both_on",
+      "y": 180
+    },
+    "powered=false,shape=east_west,connection=none,direction=negative": {
+      "model": "transportit:block/brake_rail_none",
+      "y": -90
+    },
+    "powered=false,shape=north_south,connection=none,direction=negative": {
+      "model": "transportit:block/brake_rail_none"
+    },
+    "powered=false,shape=east_west,connection=up,direction=negative": {
+      "model": "transportit:block/brake_rail_up",
+      "y": -90
+    },
+    "powered=false,shape=north_south,connection=up,direction=negative": {
+      "model": "transportit:block/brake_rail_up"
+    },
+    "powered=false,shape=east_west,connection=down,direction=negative": {
+      "model": "transportit:block/brake_rail_down",
+      "y": -90
+    },
+    "powered=false,shape=north_south,connection=down,direction=negative": {
+      "model": "transportit:block/brake_rail_down"
+    },
+    "powered=false,shape=east_west,connection=both,direction=negative": {
+      "model": "transportit:block/brake_rail_both",
+      "y": -90
+    },
+    "powered=false,shape=north_south,connection=both,direction=negative": {
+      "model": "transportit:block/brake_rail_both"
+    },
+    "powered=true,shape=east_west,connection=none,direction=negative": {
+      "model": "transportit:block/brake_rail_none_on",
+      "y": -90
+    },
+    "powered=true,shape=north_south,connection=none,direction=negative": {
+      "model": "transportit:block/brake_rail_none_on"
+    },
+    "powered=true,shape=east_west,connection=up,direction=negative": {
+      "model": "transportit:block/brake_rail_up_on",
+      "y": -90
+    },
+    "powered=true,shape=north_south,connection=up,direction=negative": {
+      "model": "transportit:block/brake_rail_up_on"
+    },
+    "powered=true,shape=east_west,connection=down,direction=negative": {
+      "model": "transportit:block/brake_rail_down_on",
+      "y": -90
+    },
+    "powered=true,shape=north_south,connection=down,direction=negative": {
+      "model": "transportit:block/brake_rail_down_on"
+    },
+    "powered=true,shape=east_west,connection=both,direction=negative": {
+      "model": "transportit:block/brake_rail_both_on",
+      "y": -90
+    },
+    "powered=true,shape=north_south,connection=both,direction=negative": {
+      "model": "transportit:block/brake_rail_both_on"
+    }
+  }
+}
